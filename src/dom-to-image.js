@@ -290,22 +290,6 @@
                         // Set child to absolute positioning relative to parent (container)
                         cloneChild.style.position = 'absolute';
 
-                        // Take into account the fact that there may be children which were already
-                        // positioned absolute relative to its parent, thus we need to use the original position
-                        if (originalIsPositionRelative && originalChildStyles['position'] === 'absolute') {
-                            var originalChildStyles = computedStylesCache[i] || window.getComputedStyle(original.children[i]);
-                            computedStylesCache[i] = originalChildStyles;
-                            var top = parseInt(originalChildStyles['top']);
-                            var left = parseInt(originalChildStyles['left']);
-                            top = isNaN(top) ? 0 : top;
-                            left = isNaN(left) ? 0 : left;
-                            top -= original.scrollTop;
-                            left -= original.scrollLeft;
-                            cloneChild.style.top = top + 'px';
-                            cloneChild.style.left = left + 'px';
-                            continue;
-                        }
-
                         const currentChildBoundingRect = boundingRectCache[i] || original.children[i].getBoundingClientRect();
 
                         // Set the childs position based on our current scroll position
